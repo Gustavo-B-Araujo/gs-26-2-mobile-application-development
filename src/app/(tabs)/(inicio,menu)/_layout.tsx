@@ -14,8 +14,9 @@ export const unstable_settings = {
 };
 
 /**
- * Pilha de cada aba: as telas abrem aqui, com o rodapé visível.
- * Os formulários (modais) ficam na pilha raiz.
+ * Pilha de cada aba: escola, turma, avaliação, boletim, frequência e chamada abrem aqui,
+ * com o rodapé visível. Os formulários (modais) ficam na pilha raiz.
+ * Cada grupo só existe para o papel que o usa.
  */
 export default function AbaLayout() {
   return (
@@ -30,6 +31,10 @@ export default function AbaLayout() {
       {/* Raiz de cada aba. O Menu aberto por link direto cai no grupo do Início e se corrige (menu.tsx). */}
       <Stack.Screen name="index" options={{ title: 'Início' }} />
       <Stack.Screen name="menu" options={{ title: 'Menu' }} />
+
+      {/* Todos os papéis. */}
+      <Stack.Screen name="aluno/[cod]/index" options={{ title: 'Boletim' }} />
+      <Stack.Screen name="aluno/[cod]/frequencia" options={{ title: 'Frequência escolar' }} />
     </Stack>
   );
 }
