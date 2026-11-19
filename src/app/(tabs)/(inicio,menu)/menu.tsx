@@ -115,6 +115,11 @@ export default function MenuScreen() {
                 subtitulo="Depois, matricule o aluno na turma"
                 href="/aluno/novo"
               />
+              <ListItem
+                titulo="Cadastrar curso"
+                subtitulo="Nova matéria, disponível para todas as escolas"
+                href="/curso/novo"
+              />
             </>
           )}
 
