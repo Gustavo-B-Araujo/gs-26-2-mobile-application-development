@@ -91,6 +91,14 @@ export default function MenuScreen() {
                   href={{ pathname: '/escola/[cod]/professores', params: { cod: e.cod } }}
                 />
               ))}
+              {data.escolas.map((e) => (
+                <ListItem
+                  key={`alunos-${e.cod}`}
+                  titulo="Alunos da escola"
+                  subtitulo={e.nome}
+                  href={{ pathname: '/escola/[cod]/alunos', params: { cod: e.cod } }}
+                />
+              ))}
             </>
           )}
 
@@ -101,6 +109,11 @@ export default function MenuScreen() {
                 titulo="Cadastrar professor"
                 subtitulo="Disponível para todas as escolas"
                 href="/professor/novo"
+              />
+              <ListItem
+                titulo="Cadastrar aluno"
+                subtitulo="Depois, matricule o aluno na turma"
+                href="/aluno/novo"
               />
             </>
           )}

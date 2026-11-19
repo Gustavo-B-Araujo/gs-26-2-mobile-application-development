@@ -48,6 +48,7 @@ export default function AbaLayout() {
 
       <Stack.Protected guard={ehDiretor}>
         <Stack.Screen name="escola/[cod]/professores" options={{ title: 'Professores' }} />
+        <Stack.Screen name="escola/[cod]/alunos" options={{ title: 'Alunos' }} />
       </Stack.Protected>
 
       <Stack.Protected guard={ehDiretor || ehProfessor}>
