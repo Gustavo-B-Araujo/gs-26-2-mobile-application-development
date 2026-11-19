@@ -21,7 +21,7 @@ export default function MenuScreen() {
    */
   if (segmentos.includes('(inicio)')) return <Redirect href={'/(tabs)/(menu)/menu' as Href} />;
 
-  const acompanha = papeis.alunoCod !== undefined;
+  const acompanha = papeis.alunoCod !== undefined || (data?.dependentes?.length ?? 0) > 0;
   const nenhumaCategoria = data !== null && !acompanha;
 
   return (
@@ -42,6 +42,21 @@ export default function MenuScreen() {
                     titulo="Minha frequência"
                     subtitulo="Presenças e faltas por matéria"
                     href={{ pathname: '/aluno/[cod]/frequencia', params: { cod: papeis.alunoCod } }}
+                  />
+                </>
+              )}
+              {/* Guardião: uma tela de cada, com o dependente escolhido no topo. */}
+              {(data.dependentes?.length ?? 0) > 0 && (
+                <>
+                  <ListItem
+                    titulo="Boletim"
+                    subtitulo="Escolha o aluno e veja notas e médias"
+                    href="/dependentes/boletim"
+                  />
+                  <ListItem
+                    titulo="Frequência"
+                    subtitulo="Escolha o aluno e veja presenças e faltas"
+                    href="/dependentes/frequencia"
                   />
                 </>
               )}

@@ -1,6 +1,8 @@
 import { Stack } from 'expo-router';
 
 import { VoltarAcima } from '@/components/ui/voltar-acima';
+import { papeisDaSessao } from '@/session/papeis';
+import { useSession } from '@/session/session-context';
 
 /**
  * Rota compartilhada: `(inicio,menu)` cria 2 grupos com as mesmas telas, um por aba.
@@ -19,6 +21,9 @@ export const unstable_settings = {
  * Cada grupo só existe para o papel que o usa.
  */
 export default function AbaLayout() {
+  const { sessao } = useSession();
+  const { ehGuardiao } = papeisDaSessao(sessao);
+
   return (
     <Stack
       screenOptions={({ navigation, route }) => ({
@@ -35,6 +40,11 @@ export default function AbaLayout() {
       {/* Todos os papéis. */}
       <Stack.Screen name="aluno/[cod]/index" options={{ title: 'Boletim' }} />
       <Stack.Screen name="aluno/[cod]/frequencia" options={{ title: 'Frequência escolar' }} />
+
+      <Stack.Protected guard={ehGuardiao}>
+        <Stack.Screen name="dependentes/boletim" options={{ title: 'Boletim' }} />
+        <Stack.Screen name="dependentes/frequencia" options={{ title: 'Frequência escolar' }} />
+      </Stack.Protected>
     </Stack>
   );
 }

@@ -1,8 +1,10 @@
 import { Stack } from 'expo-router';
+import { useState } from 'react';
 
 import { PainelDoAluno } from '@/components/painel-aluno';
 import { ThemedText } from '@/components/themed-text';
-import { Card } from '@/components/ui/card';
+import { Card, EmptyState, SectionTitle } from '@/components/ui/card';
+import { ChipGroup } from '@/components/ui/chip-group';
 import { Screen } from '@/components/ui/screen';
 import { usePainel } from '@/hooks/use-painel';
 import { plural } from '@/lib/format';
@@ -16,6 +18,13 @@ export default function HomeScreen() {
   const { papeis, pessoa } = useSessaoAtiva();
   const { data, erro, carregando, recarregar } = usePainel({ comBoletins: true });
   const meuBoletim = data?.meuBoletim ?? null;
+  const dependentes = data?.dependentes ?? [];
+  const [escolhido, setEscolhido] = useState<number | null>(null);
+  /** O guardião abre no primeiro dependente; os chips trocam de aluno. */
+  const dependenteCod = escolhido ?? dependentes[0]?.alunoCod ?? null;
+  const dependente = dependentes.find((d) => d.alunoCod === dependenteCod) ?? null;
+  const boletimDependente =
+    dependenteCod === null ? null : (data?.boletinsDependentes.get(dependenteCod) ?? null);
 
   const nenhumPapel = Object.values(papeis).every((v) => v === undefined);
 
@@ -30,6 +39,33 @@ export default function HomeScreen() {
                 boletim={meuBoletim}
                 detalhe={plural(meuBoletim.turmas.length, 'matéria')}
               />
+            )}
+
+            {data.dependentes && (
+              <>
+                {dependentes.length === 0 && (
+                  <>
+                    <SectionTitle>Meus dependentes</SectionTitle>
+                    <EmptyState texto="Nenhum aluno vinculado. Peça à escola para vincular seus dependentes." />
+                  </>
+                )}
+                {dependentes.length > 1 && (
+                  <ChipGroup
+                    opcoes={dependentes.map((d) => ({
+                      valor: d.alunoCod,
+                      rotulo: d.nome.split(' ')[0],
+                    }))}
+                    selecionado={dependenteCod}
+                    aoSelecionar={setEscolhido}
+                  />
+                )}
+                {boletimDependente && dependente && (
+                  <PainelDoAluno
+                    boletim={boletimDependente}
+                    detalhe={`${dependente.parentesco} · ${plural(boletimDependente.turmas.length, 'matéria')}`}
+                  />
+                )}
+              </>
             )}
 
             {nenhumPapel && (
