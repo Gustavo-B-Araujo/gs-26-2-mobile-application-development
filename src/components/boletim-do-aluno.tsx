@@ -2,6 +2,7 @@ import { Stack, type Href } from 'expo-router';
 import { useCallback, type ReactNode } from 'react';
 import { StyleSheet, View } from 'react-native';
 
+import { AnaliseIaCard } from '@/components/analise-ia-card';
 import { ThemedText } from '@/components/themed-text';
 import { Card, EmptyState, ListItem, SectionTitle } from '@/components/ui/card';
 import { Screen } from '@/components/ui/screen';
@@ -10,7 +11,7 @@ import type { BoletimTurma } from '@/data';
 import { useAsync } from '@/hooks/use-async';
 import { corNota } from '@/lib/boletim';
 import { formatarData, formatarNota, nomeTurma } from '@/lib/format';
-import { useSessaoAtiva } from '@/session/session-context';
+import { useSessaoAtiva, useSession } from '@/session/session-context';
 
 function NotasDaTurma({ item }: { item: BoletimTurma }) {
   return (
@@ -80,6 +81,7 @@ export function BoletimDoAluno({
   nomeNoTitulo,
 }: BoletimDoAlunoProps) {
   const { repository } = useSessaoAtiva();
+  const { servidor } = useSession();
   const { data, erro, carregando, recarregar } = useAsync(
     useCallback(() => repository.obterBoletimDoAluno(cod), [repository, cod]),
   );
@@ -97,6 +99,9 @@ export function BoletimDoAluno({
             subtitulo="Presenças e faltas por matéria"
             href={frequencia}
           />
+          {data.turmas.length > 0 && servidor.analiseIa && (
+            <AnaliseIaCard alunoCod={cod} repository={repository} />
+          )}
           {data.turmas.length === 0 && <EmptyState texto="Aluno sem matrícula em turmas." />}
           {data.turmas.map((t) => (
             <NotasDaTurma key={t.turma.cod} item={t} />
