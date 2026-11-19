@@ -14,6 +14,7 @@ import {
 } from '@/hooks/use-preferencia-tema';
 import { confirmar } from '@/lib/dialogos';
 import { formatarCpf } from '@/lib/format';
+import { papeisDaSessao } from '@/session/papeis';
 import { useSessaoAtiva, useSession } from '@/session/session-context';
 
 const NOMES_PAPEIS: [keyof Papeis, string][] = [
@@ -29,10 +30,11 @@ const OPCOES_TEMA: { valor: PreferenciaTema; rotulo: string }[] = [
   { valor: 'escuro', rotulo: 'Escuro' },
 ];
 
-/** Conta (dados, sair), aparência e aplicativo. */
+/** Conta (dados, nome, senha, sair), aparência e aplicativo. Só diretor e responsável trocam o nome. */
 export default function ConfiguracoesScreen() {
   const { pessoa, papeis } = useSessaoAtiva();
-  const { sair } = useSession();
+  const { sessao, sair } = useSession();
+  const { ehDiretor, ehGuardiao } = papeisDaSessao(sessao);
   const { preferencia } = usePreferenciaTema();
   const nomesPapeis = NOMES_PAPEIS.filter(([chave]) => papeis[chave] !== undefined).map(
     ([, nome]) => nome,
@@ -56,6 +58,10 @@ export default function ConfiguracoesScreen() {
           {nomesPapeis.length ? nomesPapeis.join(' · ') : 'Sem papel na escola'}
         </ThemedText>
       </Card>
+      {(ehDiretor || ehGuardiao) && (
+        <ListItem titulo="Alterar nome" subtitulo="Corrija o seu nome" href="/conta/nome" />
+      )}
+      <ListItem titulo="Alterar senha" subtitulo="Troque a senha de acesso" href="/conta/senha" />
 
       <SectionTitle>Aparência</SectionTitle>
       <Card>
