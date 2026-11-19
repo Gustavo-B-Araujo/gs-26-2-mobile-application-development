@@ -64,6 +64,18 @@ function RootStack() {
         <Stack.Protected guard={ehProfessor}>
           {/* Tarefa aberta pelo Menu: ao salvar, volta para o Menu. */}
           <Stack.Screen name="chamada" options={{ title: 'Fazer chamada' }} />
+          <Stack.Screen
+            name="nova-avaliacao"
+            options={{ title: 'Nova avaliação', presentation: 'modal' }}
+          />
+          <Stack.Screen
+            name="turma/[cod]/nova-avaliacao"
+            options={{ title: 'Nova avaliação', presentation: 'modal' }}
+          />
+          <Stack.Screen
+            name="avaliacao/[cod]/editar"
+            options={{ title: 'Editar avaliação', presentation: 'modal' }}
+          />
         </Stack.Protected>
       </Stack.Protected>
       <Stack.Protected guard={!logado}>

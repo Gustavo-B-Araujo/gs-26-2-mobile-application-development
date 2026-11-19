@@ -71,6 +71,11 @@ export default function MenuScreen() {
                 subtitulo="Escolha a matéria e marque a presença"
                 href="/chamada"
               />
+              <ListItem
+                titulo="Nova avaliação"
+                subtitulo="Escolha a matéria e crie a avaliação"
+                href="/nova-avaliacao"
+              />
             </>
           )}
 
