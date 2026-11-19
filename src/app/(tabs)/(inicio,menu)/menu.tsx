@@ -85,6 +85,14 @@ export default function MenuScreen() {
               <SectionTitle>Gestão escolar</SectionTitle>
               {data.escolas.map((e) => (
                 <ListItem
+                  key={`turmas-${e.cod}`}
+                  titulo="Turmas e matrículas"
+                  subtitulo={e.nome}
+                  href={{ pathname: '/escola/[cod]', params: { cod: e.cod } }}
+                />
+              ))}
+              {data.escolas.map((e) => (
+                <ListItem
                   key={`professores-${e.cod}`}
                   titulo="Professores da escola"
                   subtitulo={e.nome}
@@ -120,6 +128,15 @@ export default function MenuScreen() {
                 subtitulo="Nova matéria, disponível para todas as escolas"
                 href="/curso/novo"
               />
+              {/* A turma é de uma escola: um atalho por escola que a pessoa dirige. */}
+              {data.escolas.map((e) => (
+                <ListItem
+                  key={`nova-turma-${e.cod}`}
+                  titulo="Cadastrar turma"
+                  subtitulo={`Em ${e.nome}`}
+                  href={{ pathname: '/escola/[cod]/nova-turma', params: { cod: e.cod } }}
+                />
+              ))}
             </>
           )}
 

@@ -86,6 +86,21 @@ export default function HomeScreen() {
               </>
             )}
 
+            {data.escolas && (
+              <>
+                <SectionTitle>Escolas que dirijo</SectionTitle>
+                {data.escolas.length === 0 && <EmptyState texto="Nenhuma escola vinculada." />}
+                {data.escolas.map((e) => (
+                  <ListItem
+                    key={e.cod}
+                    titulo={e.nome}
+                    direita={<Badge texto={plural(e.totalTurmas, 'turma')} />}
+                    href={{ pathname: '/escola/[cod]', params: { cod: e.cod } }}
+                  />
+                ))}
+              </>
+            )}
+
             {nenhumPapel && (
               <Card>
                 <ThemedText>Seu usuário não tem papel na escola.</ThemedText>

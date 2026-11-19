@@ -71,6 +71,10 @@ function RootStack() {
             options={{ title: 'Editar aluno', presentation: 'modal' }}
           />
           <Stack.Screen
+            name="escola/[cod]/nova-turma"
+            options={{ title: 'Nova turma', presentation: 'modal' }}
+          />
+          <Stack.Screen
             name="curso/novo"
             options={{ title: 'Cadastrar curso', presentation: 'modal' }}
           />
