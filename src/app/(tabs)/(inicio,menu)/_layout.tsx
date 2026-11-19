@@ -47,6 +47,7 @@ export default function AbaLayout() {
       </Stack.Protected>
 
       <Stack.Protected guard={ehDiretor || ehProfessor}>
+        <Stack.Screen name="turma/[cod]/index" options={{ title: 'Turma' }} />
         <Stack.Screen name="avaliacao/[cod]/index" options={{ title: 'Notas' }} />
       </Stack.Protected>
 

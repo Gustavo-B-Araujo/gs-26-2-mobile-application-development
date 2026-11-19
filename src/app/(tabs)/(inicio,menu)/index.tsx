@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 import { PainelDoAluno } from '@/components/painel-aluno';
 import { ThemedText } from '@/components/themed-text';
-import { Card, EmptyState, SectionTitle } from '@/components/ui/card';
+import { Badge, Card, EmptyState, ListItem, SectionTitle } from '@/components/ui/card';
 import { ChipGroup } from '@/components/ui/chip-group';
 import { Screen } from '@/components/ui/screen';
 import { usePainel } from '@/hooks/use-painel';
-import { plural } from '@/lib/format';
+import { nomeTurma, plural } from '@/lib/format';
 import { useSessaoAtiva } from '@/session/session-context';
 
 /**
@@ -65,6 +65,24 @@ export default function HomeScreen() {
                     detalhe={`${dependente.parentesco} · ${plural(boletimDependente.turmas.length, 'matéria')}`}
                   />
                 )}
+              </>
+            )}
+
+            {data.turmasProfessor && (
+              <>
+                <SectionTitle>Minhas turmas</SectionTitle>
+                {data.turmasProfessor.length === 0 && (
+                  <EmptyState texto="Nenhuma turma atribuída." />
+                )}
+                {data.turmasProfessor.map((t) => (
+                  <ListItem
+                    key={t.cod}
+                    titulo={nomeTurma(t)}
+                    subtitulo={t.escolaNome}
+                    direita={<Badge texto={plural(t.totalAlunos, 'aluno')} />}
+                    href={{ pathname: '/turma/[cod]', params: { cod: t.cod } }}
+                  />
+                ))}
               </>
             )}
 
