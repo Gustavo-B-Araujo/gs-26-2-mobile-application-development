@@ -61,6 +61,17 @@ function RootStack() {
           />
         </Stack.Protected>
 
+        <Stack.Protected guard={ehDiretor}>
+          <Stack.Screen
+            name="professor/[cod]/editar"
+            options={{ title: 'Editar professor', presentation: 'modal' }}
+          />
+          <Stack.Screen
+            name="professor/novo"
+            options={{ title: 'Cadastrar professor', presentation: 'modal' }}
+          />
+        </Stack.Protected>
+
         <Stack.Protected guard={ehProfessor}>
           {/* Tarefa aberta pelo Menu: ao salvar, volta para o Menu. */}
           <Stack.Screen name="chamada" options={{ title: 'Fazer chamada' }} />

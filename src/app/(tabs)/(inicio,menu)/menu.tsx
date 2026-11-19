@@ -22,7 +22,8 @@ export default function MenuScreen() {
   if (segmentos.includes('(inicio)')) return <Redirect href={'/(tabs)/(menu)/menu' as Href} />;
 
   const acompanha = papeis.alunoCod !== undefined || (data?.dependentes?.length ?? 0) > 0;
-  const nenhumaCategoria = data !== null && !acompanha && data.turmasProfessor === null;
+  const nenhumaCategoria =
+    data !== null && !acompanha && data.turmasProfessor === null && data.escolas === null;
 
   return (
     <Screen carregando={carregando} erro={erro} aoRecarregar={recarregar}>
@@ -75,6 +76,31 @@ export default function MenuScreen() {
                 titulo="Nova avaliação"
                 subtitulo="Escolha a matéria e crie a avaliação"
                 href="/nova-avaliacao"
+              />
+            </>
+          )}
+
+          {data.escolas && data.escolas.length > 0 && (
+            <>
+              <SectionTitle>Gestão escolar</SectionTitle>
+              {data.escolas.map((e) => (
+                <ListItem
+                  key={`professores-${e.cod}`}
+                  titulo="Professores da escola"
+                  subtitulo={e.nome}
+                  href={{ pathname: '/escola/[cod]/professores', params: { cod: e.cod } }}
+                />
+              ))}
+            </>
+          )}
+
+          {data.escolas && (
+            <>
+              <SectionTitle>Cadastros da rede</SectionTitle>
+              <ListItem
+                titulo="Cadastrar professor"
+                subtitulo="Disponível para todas as escolas"
+                href="/professor/novo"
               />
             </>
           )}
