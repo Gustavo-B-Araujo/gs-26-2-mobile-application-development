@@ -113,6 +113,11 @@ export default function LoginScreen() {
                     Não tem conta? Cadastre-se
                   </ThemedText>
                 </Link>
+                <Link href="/sobre" asChild>
+                  <ThemedText type="link" themeColor="textSecondary" accessibilityRole="link">
+                    Sobre o App
+                  </ThemedText>
+                </Link>
               </View>
 
               {modoDemo && (

@@ -2,15 +2,15 @@ import { StyleSheet, View } from 'react-native';
 
 import { ThemedText } from '@/components/themed-text';
 import { Button } from '@/components/ui/button';
-import { Card, SectionTitle } from '@/components/ui/card';
+import { Card, ListItem, SectionTitle } from '@/components/ui/card';
 import { ChipGroup } from '@/components/ui/chip-group';
 import { Screen } from '@/components/ui/screen';
 import { Spacing } from '@/constants/theme';
 import type { Papeis } from '@/data';
 import {
-    definirPreferenciaTema,
-    usePreferenciaTema,
-    type PreferenciaTema,
+  definirPreferenciaTema,
+  usePreferenciaTema,
+  type PreferenciaTema,
 } from '@/hooks/use-preferencia-tema';
 import { confirmar } from '@/lib/dialogos';
 import { formatarCpf } from '@/lib/format';
@@ -29,7 +29,7 @@ const OPCOES_TEMA: { valor: PreferenciaTema; rotulo: string }[] = [
   { valor: 'escuro', rotulo: 'Escuro' },
 ];
 
-/** Conta (dados, sair) e aparência. */
+/** Conta (dados, sair), aparência e aplicativo. */
 export default function ConfiguracoesScreen() {
   const { pessoa, papeis } = useSessaoAtiva();
   const { sair } = useSession();
@@ -68,6 +68,9 @@ export default function ConfiguracoesScreen() {
           Automático segue o tema do celular.
         </ThemedText>
       </Card>
+
+      <SectionTitle>Aplicativo</SectionTitle>
+      <ListItem titulo="Sobre o App" subtitulo="Versão e commit do build" href="/sobre" />
 
       <View style={styles.sair}>
         <Button titulo="Sair da conta" variante="perigo" onPress={confirmarSaida} />
