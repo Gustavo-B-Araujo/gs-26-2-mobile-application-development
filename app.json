@@ -40,6 +40,18 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
-    }
+    },
+    "extra": {
+      "commitHash": "a089be5",
+      "router": {
+        "asyncRoutes": {
+          "web": true
+        }
+      },
+      "eas": {
+        "projectId": "daaf697e-c4a1-4732-9eda-e128d354eb57"
+      }
+    },
+    "owner": "gustavo-b-araujo"
   }
 }
