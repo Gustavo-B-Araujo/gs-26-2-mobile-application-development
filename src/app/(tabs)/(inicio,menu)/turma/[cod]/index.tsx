@@ -91,7 +91,24 @@ export default function TurmaScreen() {
           {veTurmaInteira && (
             <>
               <SectionTitle>Alunos</SectionTitle>
-              {turma.alunos.length === 0 && <EmptyState texto="Nenhum aluno matriculado." />}
+              {ehDiretor && (
+                <Button
+                  titulo="Matricular alunos"
+                  variante="secundario"
+                  onPress={() =>
+                    router.push({ pathname: '/turma/[cod]/matricular', params: { cod } })
+                  }
+                />
+              )}
+              {turma.alunos.length === 0 && (
+                <EmptyState
+                  texto={
+                    ehDiretor
+                      ? 'Nenhum aluno matriculado. Toque em Matricular alunos.'
+                      : 'Nenhum aluno matriculado. Peça ao diretor da escola para matricular.'
+                  }
+                />
+              )}
               {turma.alunos.map((al) => (
                 <ListItem
                   key={al.turmaAlunoCod}

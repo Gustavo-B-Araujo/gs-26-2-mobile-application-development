@@ -86,6 +86,10 @@ function RootStack() {
             name="aluno/novo"
             options={{ title: 'Cadastrar aluno', presentation: 'modal' }}
           />
+          <Stack.Screen
+            name="turma/[cod]/matricular"
+            options={{ title: 'Matricular alunos', presentation: 'modal' }}
+          />
         </Stack.Protected>
 
         <Stack.Protected guard={ehProfessor}>
