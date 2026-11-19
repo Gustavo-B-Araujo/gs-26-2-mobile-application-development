@@ -31,7 +31,7 @@ function RootStack() {
   });
   const pronto = !restaurando && temaCarregado && (fontesProntas || erroFontes !== null);
   const logado = sessao !== null;
-  const { ehDiretor, ehGuardiao } = papeisDaSessao(sessao);
+  const { ehDiretor, ehProfessor, ehGuardiao } = papeisDaSessao(sessao);
 
   useEffect(() => {
     if (pronto) SplashScreen.hide();
@@ -59,6 +59,11 @@ function RootStack() {
             name="conta/nome"
             options={{ title: 'Alterar nome', presentation: 'modal' }}
           />
+        </Stack.Protected>
+
+        <Stack.Protected guard={ehProfessor}>
+          {/* Tarefa aberta pelo Menu: ao salvar, volta para o Menu. */}
+          <Stack.Screen name="chamada" options={{ title: 'Fazer chamada' }} />
         </Stack.Protected>
       </Stack.Protected>
       <Stack.Protected guard={!logado}>

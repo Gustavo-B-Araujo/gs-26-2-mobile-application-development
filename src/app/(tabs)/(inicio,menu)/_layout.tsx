@@ -22,7 +22,7 @@ export const unstable_settings = {
  */
 export default function AbaLayout() {
   const { sessao } = useSession();
-  const { ehGuardiao } = papeisDaSessao(sessao);
+  const { ehProfessor, ehGuardiao } = papeisDaSessao(sessao);
 
   return (
     <Stack
@@ -44,6 +44,10 @@ export default function AbaLayout() {
       <Stack.Protected guard={ehGuardiao}>
         <Stack.Screen name="dependentes/boletim" options={{ title: 'Boletim' }} />
         <Stack.Screen name="dependentes/frequencia" options={{ title: 'Frequência escolar' }} />
+      </Stack.Protected>
+
+      <Stack.Protected guard={ehProfessor}>
+        <Stack.Screen name="turma/[cod]/chamada" options={{ title: 'Chamada' }} />
       </Stack.Protected>
     </Stack>
   );

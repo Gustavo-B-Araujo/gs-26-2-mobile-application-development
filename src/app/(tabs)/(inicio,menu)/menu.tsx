@@ -22,7 +22,7 @@ export default function MenuScreen() {
   if (segmentos.includes('(inicio)')) return <Redirect href={'/(tabs)/(menu)/menu' as Href} />;
 
   const acompanha = papeis.alunoCod !== undefined || (data?.dependentes?.length ?? 0) > 0;
-  const nenhumaCategoria = data !== null && !acompanha;
+  const nenhumaCategoria = data !== null && !acompanha && data.turmasProfessor === null;
 
   return (
     <Screen carregando={carregando} erro={erro} aoRecarregar={recarregar}>
@@ -60,6 +60,17 @@ export default function MenuScreen() {
                   />
                 </>
               )}
+            </>
+          )}
+
+          {data.turmasProfessor && data.turmasProfessor.length > 0 && (
+            <>
+              <SectionTitle>Sala de aula</SectionTitle>
+              <ListItem
+                titulo="Fazer chamada"
+                subtitulo="Escolha a matéria e marque a presença"
+                href="/chamada"
+              />
             </>
           )}
 
