@@ -1,2 +1,12 @@
 Global Solution 2026/2 - Boletim Plus
 Disciplina: Mobile Application Development
+Turma: 2TDSPW
+
+Vídeo demonstração: https://youtu.be/8NOZdNgO4Nk
+Github: https://github.com/Gustavo-B-Araujo/gs-26-2-mobile-application-development
+
+Nome completo               RM
+Gustavo Barrios de Araújo   RM563358
+Phietro Solon Oliveira      RM563842
+
+Nota: devido ao custo, decidimos não manter o deploy ativo na Azure, por isso não há link no repositório.

@@ -27,6 +27,7 @@ O cidadão ganha acompanhamento escolar em tempo real, sem depender de reunião 
 Repositório dB: https://github.com/Gustavo-B-Araujo/gs-26-2-mastering-relational-and-non-relational-database
 Repositório .NET: https://github.com/Gustavo-B-Araujo/gs-26-2-advanced-business-development
 Repositório Java: https://github.com/Gustavo-B-Araujo/gs-26-2-java-advanced
+Vídeo demonstração: https://youtu.be/8NOZdNgO4Nk
 
 
 ## Rodar
